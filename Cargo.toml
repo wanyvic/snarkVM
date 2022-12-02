@@ -131,6 +131,7 @@ path = "./algorithms"
 version = "0.9.9"
 optional = true
 default-features = false
+features = [ "profiler" ]
 
 [dependencies.snarkvm-circuit]
 path = "./circuit"
