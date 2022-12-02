@@ -186,7 +186,7 @@ fn load_cuda_program() -> Result<Program, GPUError> {
 
     eprintln!("\nUsing '{}' as CUDA device with {} bytes of memory", device.name(), device.memory());
 
-    eprintln!("reading kernel {}");
+    eprintln!("reading kernel");
     let cuda_kernel = std::fs::read(file_path.clone())?;
 
     // Load the cuda program from the kernel bytes.
