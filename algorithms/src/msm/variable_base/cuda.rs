@@ -165,22 +165,28 @@ fn load_cuda_program() -> Result<Program, GPUError> {
         None => return Err(GPUError::DeviceNotFound),
     };
 
+    eprintln!("Found device name {}", device.name());
     // Find the path to the msm fatbin kernel
     let mut file_path = aleo_std::aleo_dir();
     file_path.push("resources/cuda/msm.fatbin");
+    eprintln!("msm.fatbin file path {}", file_path);
 
     // If the file does not exist, regenerate the fatbin.
     if !file_path.exists() {
+        eprintln!("generate_cuda_binary");
         generate_cuda_binary(&file_path, false)?;
     }
 
+    eprintln!("founding cuda_device");
     let cuda_device = match device.cuda_device() {
         Some(device) => device,
         None => return Err(GPUError::DeviceNotFound),
     };
+    eprintln!("Found cuda device name {}", cuda_device.name());
 
     eprintln!("\nUsing '{}' as CUDA device with {} bytes of memory", device.name(), device.memory());
 
+    eprintln!("reading kernel {}");
     let cuda_kernel = std::fs::read(file_path.clone())?;
 
     // Load the cuda program from the kernel bytes.
