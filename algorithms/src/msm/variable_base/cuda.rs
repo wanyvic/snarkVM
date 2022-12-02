@@ -169,7 +169,7 @@ fn load_cuda_program() -> Result<Program, GPUError> {
     // Find the path to the msm fatbin kernel
     let mut file_path = aleo_std::aleo_dir();
     file_path.push("resources/cuda/msm.fatbin");
-    eprintln!("msm.fatbin file path {}", file_path.as_ref().as_os_str());
+    eprintln!("msm.fatbin file path {}", file_path.to_string());
 
     // If the file does not exist, regenerate the fatbin.
     if !file_path.exists() {
